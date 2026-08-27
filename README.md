@@ -22,3 +22,10 @@ The language selector provides visitor-facing translations. It does not make cla
 
 ## Deployment
 Cloudflare Pages is connected to this repository. Replace the site files with this V5 package, commit to the main branch, and allow Cloudflare Pages to deploy automatically.
+
+## V5.1
+- Fixed desktop language selector width so it no longer expands to 100%.
+- Fixed mobile header overflow for longer translated brand subtitles.
+- Kept the selected language visible while protecting the menu control.
+- Removed the Sri Lanka flag from the hero credential badge.
+- Journey card image mapping is corrected: South Coast, Cultural Triangle, Hill Country, Wildlife, Waterfalls/Scenic Roads, Ella.
