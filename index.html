@@ -71,9 +71,9 @@
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 10px 30px rgba(13,59,53,.05)}
     .card-icon{width:48px;height:48px;border-radius:15px;background:var(--forest-3);display:grid;place-items:center;font-size:1.35rem;margin-bottom:22px}.card p{color:var(--muted);margin-bottom:0}
     .journeys{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.journey{min-height:310px;border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;position:relative;color:#fff;background:var(--forest)}
-    .journey:nth-child(1){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/cultural-triangle.webp") center/cover}
-    .journey:nth-child(2){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/hill-country.webp") center/cover}
-    .journey:nth-child(3){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/south-coast.webp") center/cover}
+    .journey:nth-child(1){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/south-coast.webp") center/cover}
+    .journey:nth-child(2){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/cultural-triangle.webp") center/cover}
+    .journey:nth-child(3){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/hill-country.webp") center/cover}
     .journey:nth-child(4){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/wildlife.webp") center/cover}
     .journey:nth-child(5){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/scenic-roads.webp") center/cover}
     .journey:nth-child(6){background:linear-gradient(180deg,rgba(13,59,53,.05),rgba(7,29,26,.92)),url("images/complete-sri-lanka.webp") center/cover}
@@ -120,18 +120,61 @@
       .trust-item{border-right:0}.service-band,.sunspire-box,.contact-panel{padding:27px}.portrait,.portrait img{min-height:420px}.vehicle-photo{min-height:340px}.vehicle-gallery img{height:105px}
       .footer-grid{gap:25px}.lang{padding:7px 9px}
     }
-  </style>
+  
+/* V5 production polish */
+.lang{min-width:64px;min-height:42px;color:var(--forest)!important;-webkit-text-fill-color:var(--forest);color-scheme:light;font-size:.8rem;line-height:1;opacity:1;flex:0 0 auto}
+.sunspire-mark{flex:0 0 78px;width:78px;height:78px;aspect-ratio:1/1;display:grid;place-items:center;align-self:center}
+.cf-turnstile{width:100%;min-height:65px;display:flex;align-items:center;justify-content:flex-start}
+.reveal{opacity:1;transform:none}
+.reveal-ready .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal-ready .reveal.is-visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.08s!important}.reveal-delay-2{transition-delay:.16s!important}.reveal-delay-3{transition-delay:.24s!important}
+.journey{transition:transform .35s ease,box-shadow .35s ease}.journey:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(7,29,26,.22)}
+.card,.review,.why,.step{transition:transform .3s ease,box-shadow .3s ease}.card:hover,.review:hover,.why:hover,.step:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(13,59,53,.08)}
+@media(max-width:980px){
+  .sunspire-mark{flex:0 0 70px;width:70px;height:70px}
+  .lang{min-width:64px;padding:8px 10px}
+}
+@media(max-width:640px){
+  .lang{min-width:64px;width:64px;height:42px;padding:8px 9px;font-size:.78rem;text-align:center}
+  .nav-actions{gap:7px}.sunspire-box{gap:20px;align-items:flex-start}.sunspire-mark{flex:0 0 64px;width:64px;height:64px;border-radius:20px}
+  .cf-turnstile{min-height:65px;overflow:hidden}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.reveal-ready .reveal{opacity:1;transform:none;transition:none}.journey,.card,.review,.why,.step,.btn{transition:none}
+}
+
+</style>
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@graph":[
       {
+        "@type":"WebSite",
+        "@id":"https://nishansrilanka.com/#website",
+        "url":"https://nishansrilanka.com/",
+        "name":"Nishan | Sri Lanka Private Tours & Tourist Driver",
+        "inLanguage":["en","de","fr","es","it","ta","ms","ja"],
+        "publisher":{"@id":"https://nishansrilanka.com/#person"}
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://nishansrilanka.com/#webpage",
+        "url":"https://nishansrilanka.com/",
+        "name":"Nishan | Sri Lanka Private Tours & Tourist Driver",
+        "isPartOf":{"@id":"https://nishansrilanka.com/#website"},
+        "about":{"@id":"https://nishansrilanka.com/#person"},
+        "mainEntity":{"@id":"https://nishansrilanka.com/#person"},
+        "inLanguage":"en"
+      },
+      {
         "@type":"Person",
         "@id":"https://nishansrilanka.com/#person",
         "name":"Nishan",
         "jobTitle":"SLTDA-Licensed Tourist Driver",
         "url":"https://nishansrilanka.com/",
+        "image":"https://nishansrilanka.com/images/nishan.webp",
         "telephone":"+94702289167",
         "areaServed":{"@type":"Country","name":"Sri Lanka"},
         "knowsAbout":["Sri Lanka private tours","Sri Lanka tourism","tour driving","airport transfers","Sri Lanka road travel"]
@@ -148,6 +191,7 @@
     ]
   }
   </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -211,11 +255,11 @@
   <div class="section-head"><span class="eyebrow" data-i18n="journeyEyebrow">Travel inspiration</span><h2 data-i18n="journeyTitle">Popular Sri Lanka journey ideas.</h2><p class="lead" data-i18n="journeyIntro">These are starting points, not fixed packages. Tell me what you want to see and we can shape the journey around you.</p></div>
   <div class="journeys">
     <article class="journey"><small data-i18n="j1Days">5 DAYS</small><h3 data-i18n="j1Title">South Coast & Galle</h3><p data-i18n="j1Text">Galle, beaches, coastal towns and relaxed southern travel.</p></article>
-    <article class="journey"><small data-i18n="j2Days">7 DAYS</small><h3 data-i18n="j2Title">Cultural Triangle & Hills</h3><p data-i18n="j2Text">Sigiriya, Kandy, tea country and Ella.</p></article>
-    <article class="journey"><small data-i18n="j3Days">7 DAYS</small><h3 data-i18n="j3Title">Hill Country to the Coast</h3><p data-i18n="j3Text">Kandy, Nuwara Eliya, Ella and the southern coast.</p></article>
+    <article class="journey"><small data-i18n="j2Days">7 DAYS</small><h3 data-i18n="j2Title">Cultural Triangle</h3><p data-i18n="j2Text">Sigiriya, Kandy, tea country and Ella.</p></article>
+    <article class="journey"><small data-i18n="j3Days">7 DAYS</small><h3 data-i18n="j3Title">Sri Lanka's Hill Country</h3><p data-i18n="j3Text">Kandy, Nuwara Eliya, Ella and the southern coast.</p></article>
     <article class="journey"><small data-i18n="j4Days">6–8 DAYS</small><h3 data-i18n="j4Title">Wildlife & Nature</h3><p data-i18n="j4Text">Combine national parks, scenic roads and quieter nature experiences.</p></article>
     <article class="journey"><small data-i18n="j5Days">FLEXIBLE</small><h3 data-i18n="j5Title">Waterfalls & Scenic Roads</h3><p data-i18n="j5Text">Ramboda, mountain roads, waterfalls and scenic hill-country stops.</p></article>
-    <article class="journey"><small data-i18n="j6Days">CUSTOM</small><h3 data-i18n="j6Title">Complete Sri Lanka</h3><p data-i18n="j6Text">A longer private journey combining culture, hills, wildlife and beaches.</p></article>
+    <article class="journey"><small data-i18n="j6Days">CUSTOM</small><h3 data-i18n="j6Title">Ella & Mountain Adventures</h3><p data-i18n="j6Text">A longer private journey combining culture, hills, wildlife and beaches.</p></article>
   </div>
   <p style="margin-top:24px"><a class="text-link" href="#contact" data-i18n="journeyCta">Tell me what you have in mind →</a></p>
 </div></section>
@@ -251,7 +295,7 @@
 <section class="section" id="vehicle"><div class="container vehicle">
   <div class="vehicle-media"><div class="vehicle-photo" role="img" aria-label="Nishan private vehicle"></div><div class="vehicle-gallery" aria-label="Vehicle photographs"><img src="images/vehicle-front.webp" alt="Front view of Nishan vehicle" loading="lazy"><img src="images/vehicle-seats.webp" alt="Passenger seating inside Nishan vehicle" loading="lazy"><img src="images/vehicle-rear.webp" alt="Rear side view of Nishan vehicle" loading="lazy"></div></div>
   <div><span class="eyebrow" data-i18n="vehicleEyebrow">Travel comfortably</span><h2 data-i18n="vehicleTitle">The vehicle is part of the experience.</h2>
-    <p class="lead" data-i18n="vehicleIntro">For multi-day travel, comfort matters. Your journey is made in a private, air-conditioned vehicle that is kept clean and comfortable for the road. With practical passenger seating and luggage space, it is suited to relaxed journeys across Sri Lanka</p>
+    <p class="lead" data-i18n="vehicleIntro">For multi-day travel, comfort matters. Your journey is made in a private, air-conditioned vehicle that is kept clean and comfortable for the road. With practical passenger seating and luggage space, it is suited to relaxed journeys across Sri Lanka.</p>
     <ul class="check-list"><li data-i18n="vehicle1">Private vehicle for your group</li><li data-i18n="vehicle2">Air conditioning</li><li data-i18n="vehicle3">Clean and well maintained</li><li data-i18n="vehicle4">Suitable luggage space for your group</li></ul>
   </div>
 </div></section>
@@ -294,8 +338,9 @@
       <div class="form-row"><div><label for="start" data-i18n="formStartLabel">Arrival / start date</label><input id="start" name="start_date" type="date"></div>
       <div><label for="service" data-i18n="formServiceLabel">What do you need?</label><select id="service" name="service"><option data-i18n="optPrivate">Private Tourist Driver</option><option data-i18n="optAirport">Airport Transfer</option><option data-i18n="optCustom">Custom Journey</option><option data-i18n="optAgency">Travel Company Driver Service</option><option data-i18n="optOther">Other</option></select></div></div>
       <div><label for="message" data-i18n="formMessageLabel">Tell me about your trip</label><textarea id="message" name="message" required data-i18n-placeholder="formMessagePh" placeholder="Dates, places you want to visit, vehicle needs, questions..."></textarea></div>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAEdkeZFcoVBSxkSa" data-size="flexible" data-theme="light"></div>
       <button class="btn btn-primary" type="submit" data-i18n="formButton">Send enquiry</button>
-      <p class="form-note" data-i18n="formNote">Your enquiry is sent securely through the form service. Spam protection will be enabled before launch.</p>
+      <p class="form-note" data-i18n="formNote">Your enquiry is securely submitted with spam protection enabled.</p>
     </form>
   </div>
 </div></section>
