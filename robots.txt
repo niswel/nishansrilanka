@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://nishansrilanka.com/sitemap.xml
+
+# Optional AI/agent-readable site summary:
+# https://nishansrilanka.com/llms.txt
