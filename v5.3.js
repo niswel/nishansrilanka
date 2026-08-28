@@ -177,6 +177,21 @@
     button.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
   }
 
+  function setupFormReset(){
+    const form=document.getElementById("contact-form");
+    if(!form) return;
+
+    // Prevent the browser from restoring a previously submitted enquiry
+    // when the visitor returns to the form with the Back button.
+    window.addEventListener("beforeunload",()=>form.reset());
+    window.addEventListener("pageshow",event=>{
+      if(event.persisted){
+        form.reset();
+        if(window.turnstile && typeof window.turnstile.reset==="function") window.turnstile.reset();
+      }
+    });
+  }
+
   function setupImageFallback(){
     document.querySelectorAll("img").forEach(img=>{
       img.addEventListener("error",()=>{
@@ -191,5 +206,6 @@
     setupReveal();
     setupTopButton();
     setupImageFallback();
+    setupFormReset();
   });
 })();
