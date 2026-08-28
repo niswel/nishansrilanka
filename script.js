@@ -302,3 +302,36 @@ if(V52_LANGUAGE_SELECT){
   v52ApplyLanguage(initial);
   window.renderReviews();
 }
+
+/* GA4 contact events */
+document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
+  link.addEventListener("click", () => {
+    if (typeof gtag === "function") {
+      gtag("event", "whatsapp_click", {
+        link_location: link.classList.contains("float-wa")
+          ? "floating"
+          : link.closest(".hero-actions")
+            ? "hero"
+            : "header_or_contact"
+      });
+    }
+  });
+});
+
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.addEventListener("click", () => {
+    if (typeof gtag === "function") {
+      gtag("event", "phone_click");
+    }
+  });
+});
+
+document.querySelectorAll('a[href="#contact"]').forEach(link => {
+  link.addEventListener("click", () => {
+    if (typeof gtag === "function") {
+      gtag("event", "contact_cta", {
+        link_text: link.textContent.trim()
+      });
+    }
+  });
+});
