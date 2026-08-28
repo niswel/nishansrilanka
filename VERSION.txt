@@ -1,0 +1,4 @@
+Nishan Sri Lanka website - V5.3.2 Final
+Base: V5.3.1 production package
+Final contact-form polish: Name, Email and Message remain required; the contact form is reset when the visitor navigates away/returns with the browser Back button, and the Turnstile widget is reset when the page is restored from browser history.
+Formspree endpoint and Turnstile configuration retained.
