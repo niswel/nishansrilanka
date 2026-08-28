@@ -167,6 +167,14 @@
   .menu-btn{flex:0 0 40px;width:40px;height:40px;padding:0}
 }
 
+
+/* V5.3.1 real photography, lightbox and scroll polish */
+.real-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}.real-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.real-card{position:relative;border-radius:22px;overflow:hidden;min-height:280px;background:var(--forest);cursor:pointer;border:0;padding:0;text-align:left;color:#fff}.real-card img{width:100%;height:100%;min-height:280px;object-fit:cover;transition:transform .5s ease}.real-card::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(5,28,25,.82));pointer-events:none}.real-card:hover img{transform:scale(1.035)}.real-caption{position:absolute;left:20px;right:20px;bottom:16px;z-index:2;color:#fff;font-weight:800}.real-main{grid-row:span 2;min-height:578px}.real-side{display:grid;gap:18px}.real-side .real-card{min-height:280px}.group-note{margin-top:18px;background:var(--forest-3);border-radius:18px;padding:18px 20px;color:var(--forest);font-size:.92rem}
+.v53-lightbox{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh}.v53-lightbox::backdrop{background:rgba(3,20,18,.82);backdrop-filter:blur(4px)}.v53-lightbox img{max-width:92vw;max-height:84vh;width:auto;height:auto;border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.35)}.v53-lightbox-close{position:fixed;right:24px;top:18px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;color:var(--forest);font-size:1.4rem;cursor:pointer;z-index:2}
+.vehicle-gallery button{border:0;padding:0;background:none;cursor:pointer;border-radius:16px;overflow:hidden}.vehicle-gallery button img{display:block}.vehicle-gallery button:focus-visible,.real-card:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media(max-width:980px){.real-grid{grid-template-columns:1fr}.real-main{grid-row:auto}.real-gallery{grid-template-columns:1fr 1fr}.real-side{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.real-gallery,.real-side{grid-template-columns:1fr}.real-main,.real-side .real-card,.real-card{min-height:250px}.v53-lightbox-close{right:14px;top:12px}.v53-lightbox img{max-width:94vw;max-height:80vh}}
+
 </style>
 
   <script type="application/ld+json">
@@ -341,6 +349,22 @@
   </div>
 </div></section>
 
+<section class="section" id="real-journeys"><div class="container">
+  <div class="section-head reveal"><span class="eyebrow" data-v53-i18n="realEyebrow">Real journeys</span><h2 data-v53-i18n="realTitle">Real journeys. Real guests.</h2><p class="lead" data-v53-i18n="realIntro">A few moments from journeys travelled across Sri Lanka with Nishan.</p></div>
+  <div class="real-grid">
+    <div class="real-gallery">
+      <button class="real-card real-main reveal" type="button" data-v53-photo="images/journeys/journey-ella-train.webp" data-v53-alt="Guests with Nishan at Ella railway station"><img src="images/journeys/journey-ella-train.webp" alt="Guests with Nishan at Ella railway station" width="1200" height="800" loading="lazy" decoding="async"><span class="real-caption" data-v53-i18n="photoElla">Ella railway journey</span></button>
+      <button class="real-card reveal reveal-delay-1" type="button" data-v53-photo="images/journeys/journey-beach.webp" data-v53-alt="Guests enjoying a beachside restaurant in Sri Lanka"><img src="images/journeys/journey-beach.webp" alt="Guests enjoying a beachside restaurant in Sri Lanka" width="1200" height="800" loading="lazy" decoding="async"><span class="real-caption" data-v53-i18n="photoBeach">Beachside stop</span></button>
+      <button class="real-card reveal reveal-delay-2" type="button" data-v53-photo="images/journeys/journey-food.webp" data-v53-alt="Guests enjoying a local Sri Lankan food experience"><img src="images/journeys/journey-food.webp" alt="Guests enjoying a local Sri Lankan food experience" width="1200" height="800" loading="lazy" decoding="async"><span class="real-caption" data-v53-i18n="photoFood">Local food experience</span></button>
+    </div>
+    <div class="real-side">
+      <button class="real-card reveal" type="button" data-v53-photo="images/journeys/journey-tea.webp" data-v53-alt="Traveller experiencing Sri Lanka tea country"><img src="images/journeys/journey-tea.webp" alt="Traveller experiencing Sri Lanka tea country" width="1200" height="800" loading="lazy" decoding="async"><span class="real-caption" data-v53-i18n="photoTea">Tea country</span></button>
+      <button class="real-card reveal reveal-delay-1" type="button" data-v53-photo="images/journeys/journey-airport.webp" data-v53-alt="Nishan with guests at an airport arrival"><img src="images/journeys/journey-airport.webp" alt="Nishan with guests at an airport arrival" width="1200" height="800" loading="lazy" decoding="async"><span class="real-caption" data-v53-i18n="photoAirport">Airport arrival</span></button>
+    </div>
+  </div>
+  <div class="group-note reveal" data-v53-i18n="groupNote">Travelling with a larger party? Suitable vehicles can also be arranged for group tours. The photograph above is from a Malaysian group tour of nine passengers.</div>
+</div></section>
+
 <section class="section alt" id="reviews"><div class="container reviews-wrap">
   <aside class="rating-card"><span class="eyebrow" style="color:#f5e7c7" data-i18n="reviewsEyebrow">Guest experiences</span><div class="rating-number">5.0</div><div class="stars">★★★★★</div>
     <h3 data-i18n="reviewsTitle">Google reviews from travellers.</h3><p data-i18n="reviewsIntro">These reviews are about Nishan's driving, service and local knowledge.</p>
@@ -350,7 +374,12 @@
 </div></section>
 
 <section class="section" id="vehicle"><div class="container vehicle">
-  <div class="vehicle-media"><div class="vehicle-photo" role="img" aria-label="Nishan private vehicle"></div><div class="vehicle-gallery" aria-label="Vehicle photographs"><img src="images/vehicle-front.webp" alt="Front view of Nishan vehicle" loading="lazy"><img src="images/vehicle-seats.webp" alt="Passenger seating inside Nishan vehicle" loading="lazy"><img src="images/vehicle-rear.webp" alt="Rear side view of Nishan vehicle" loading="lazy"></div></div>
+  <div class="vehicle-media"><div class="vehicle-photo" role="img" aria-label="Nishan private vehicle"></div><div class="vehicle-gallery" aria-label="Vehicle photographs">
+<button type="button" data-v53-photo="images/vehicle/vehicle-front.webp" data-v53-alt="Front view of Nishan private vehicle"><img src="images/vehicle/vehicle-front.webp" alt="Front view of Nishan private vehicle" width="1200" height="800" loading="lazy" decoding="async"></button>
+<button type="button" data-v53-photo="images/vehicle/vehicle-seats.webp" data-v53-alt="Passenger seating inside Nishan private vehicle"><img src="images/vehicle/vehicle-seats.webp" alt="Passenger seating inside Nishan private vehicle" width="1200" height="800" loading="lazy" decoding="async"></button>
+<button type="button" data-v53-photo="images/vehicle/vehicle-luggage.webp" data-v53-alt="Luggage space inside Nishan private vehicle"><img src="images/vehicle/vehicle-luggage.webp" alt="Luggage space inside Nishan private vehicle" width="1200" height="800" loading="lazy" decoding="async"></button>
+<button type="button" data-v53-photo="images/vehicle/vehicle-cabin.webp" data-v53-alt="Driver cabin of Nishan private vehicle"><img src="images/vehicle/vehicle-cabin.webp" alt="Driver cabin of Nishan private vehicle" width="1200" height="800" loading="lazy" decoding="async"></button>
+</div></div>
   <div><span class="eyebrow" data-i18n="vehicleEyebrow">Travel comfortably</span><h2 data-i18n="vehicleTitle">The vehicle is part of the experience.</h2>
     <p class="lead" data-i18n="vehicleIntro">For multi-day travel, comfort matters. Your journey is made in a private, air-conditioned vehicle that is kept clean and comfortable for the road. With practical passenger seating and luggage space, it is suited to relaxed journeys across Sri Lanka.</p>
     <ul class="check-list"><li data-i18n="vehicle1">Private vehicle for your group</li><li data-i18n="vehicle2">Air conditioning</li><li data-i18n="vehicle3">Clean and well maintained</li><li data-i18n="vehicle4">Suitable luggage space for your group</li></ul>
@@ -422,6 +451,7 @@
 </div><div class="footer-bottom"><span>© <span id="year"></span> Nishan. All rights reserved.</span><span data-i18n="footerLocation">Meegoda, Sri Lanka · Private Tourist Driver</span></div></div></footer>
 <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">↑</button>
 <a class="float-wa" href="https://wa.me/94702289167" target="_blank" rel="noopener" aria-label="WhatsApp Nishan">◉</a>
-<script src="script.js"></script>
+<dialog class="v53-lightbox" id="v53Lightbox" aria-label="Photo viewer"><button class="v53-lightbox-close" id="v53LightboxClose" type="button" aria-label="Close image">×</button><img id="v53LightboxImage" src="" alt=""></dialog>
+<script src="script.js"></script><script src="v5.3.js"></script>
 </body>
 </html>
