@@ -1,15 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MVCEM5Q7VG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google Consent Mode v2 + Google tag -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
 
-  gtag('config', 'G-MVCEM5Q7VG');
-</script>
+    /* Default: deny optional Google storage until the visitor chooses. */
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+
+    /* Restore an existing visitor choice before the Google tag config runs. */
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('nishanCookieConsent') || 'null');
+        if (saved && saved.version === 1) {
+          gtag('consent', 'update', {
+            'ad_storage': saved.advertising ? 'granted' : 'denied',
+            'ad_user_data': saved.advertising ? 'granted' : 'denied',
+            'ad_personalization': saved.advertising ? 'granted' : 'denied',
+            'analytics_storage': saved.analytics ? 'granted' : 'denied'
+          });
+        }
+      } catch (e) {}
+    })();
+
+    gtag('js', new Date());
+    gtag('config', 'G-MVCEM5Q7VG');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVCEM5Q7VG"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nishan | Sri Lanka Private Tours & Tourist Driver</title>
@@ -265,9 +290,58 @@
       .lang{width:64px!important;min-width:64px!important;max-width:64px!important;flex-basis:64px!important}
       .menu-btn{flex-basis:36px;width:36px}
     }
+
+
+    /* =========================================================
+       COOKIE CONSENT
+       ========================================================= */
+    .cookie-banner{position:fixed;left:20px;right:20px;bottom:90px;z-index:95;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 60px rgba(13,59,53,.18);padding:18px 20px}
+    .cookie-banner[hidden],.cookie-modal[hidden]{display:none!important}
+    .cookie-content{width:min(100%,var(--max));margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .cookie-copy{max-width:760px}.cookie-copy strong{display:block;color:var(--forest);font-size:1rem;margin-bottom:4px}.cookie-copy p{margin:0 0 5px;color:var(--muted);font-size:.86rem;line-height:1.5}.cookie-copy a{color:var(--forest);font-size:.8rem;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+    .cookie-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;flex:0 0 auto}
+    .cookie-btn{border:1px solid transparent;border-radius:999px;padding:10px 14px;font-size:.8rem;font-weight:800;cursor:pointer;white-space:nowrap}.cookie-primary{background:var(--forest);color:#fff}.cookie-secondary{background:#eef3f1;color:var(--forest);border-color:var(--line)}.cookie-btn:hover{transform:translateY(-1px)}
+    .cookie-modal{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;background:rgba(4,24,21,.55);backdrop-filter:blur(3px)}
+    .cookie-modal-box{position:relative;width:min(100%,560px);max-height:calc(100vh - 40px);overflow:auto;background:#fff;color:var(--ink);border-radius:24px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.28)}
+    .cookie-modal-box h2{margin:0 38px 10px 0;color:var(--forest)}.cookie-modal-box>p{color:var(--muted);line-height:1.6}
+    .cookie-close{position:absolute;top:14px;right:16px;width:38px;height:38px;border:0;border-radius:50%;background:var(--cream);color:var(--forest);font-size:1.3rem;cursor:pointer}
+    .cookie-option{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-top:1px solid var(--line)}.cookie-option strong{display:block}.cookie-option span{display:block;margin-top:4px;color:var(--muted);font-size:.82rem;line-height:1.45}.cookie-toggle{cursor:pointer}.cookie-toggle input{width:20px;height:20px;accent-color:var(--forest);flex:0 0 auto}.cookie-modal-actions{margin:20px 0}.cookie-settings-link{display:inline-block;margin-top:10px;color:var(--forest);font-size:.82rem;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+    @media(max-width:760px){.cookie-banner{left:10px;right:10px;bottom:82px;padding:16px}.cookie-content{display:block}.cookie-actions{margin-top:13px;justify-content:flex-start}.cookie-btn{font-size:.76rem;padding:9px 12px}.cookie-modal-box{padding:25px 20px}}
+
   </style>
 </head>
 <body>
+
+<!-- =========================================================
+     COOKIE CONSENT
+     ========================================================= -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieText" hidden>
+  <div class="cookie-content">
+    <div class="cookie-copy">
+      <strong id="cookieTitle">We use cookies and similar technologies</strong>
+      <p id="cookieText">We use analytics to understand how visitors use this website and advertising tools to measure campaigns. You can accept or reject optional technologies.</p>
+      <a href="privacy.html" id="cookiePrivacy">Privacy Policy</a>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" id="cookieReject" class="cookie-btn cookie-secondary">Reject non-essential</button>
+      <button type="button" id="cookieSettings" class="cookie-btn cookie-secondary">Manage preferences</button>
+      <button type="button" id="cookieAccept" class="cookie-btn cookie-primary">Accept all</button>
+    </div>
+  </div>
+</div>
+<div id="cookiePreferences" class="cookie-modal" role="dialog" aria-labelledby="cookiePreferencesTitle" aria-modal="true" hidden>
+  <div class="cookie-modal-box">
+    <button type="button" id="cookieClose" class="cookie-close" aria-label="Close">×</button>
+    <h2 id="cookiePreferencesTitle">Cookie preferences</h2>
+    <p id="cookiePreferencesIntro">Choose which optional technologies you allow us to use. Necessary technologies remain active because they are required for the website and your consent choices to function.</p>
+    <div class="cookie-option"><div><strong id="cookieNecessaryTitle">Necessary</strong><span id="cookieNecessaryText">Required for the website to function and to remember your consent choice.</span></div><strong id="cookieAlwaysActive">Always active</strong></div>
+    <label class="cookie-option cookie-toggle"><div><strong id="cookieAnalyticsTitle">Analytics</strong><span id="cookieAnalyticsText">Allows Google Analytics to measure website usage and improve the site.</span></div><input type="checkbox" id="cookieAnalytics"></label>
+    <label class="cookie-option cookie-toggle"><div><strong id="cookieAdvertisingTitle">Advertising</strong><span id="cookieAdvertisingText">Allows Google advertising measurement and related advertising features.</span></div><input type="checkbox" id="cookieAdvertising"></label>
+    <div class="cookie-modal-actions"><button type="button" id="cookieSave" class="cookie-btn cookie-primary">Save preferences</button></div>
+    <a href="privacy.html" class="cookie-settings-link" id="cookieReadPrivacy">Read our Privacy Policy</a>
+  </div>
+</div>
+
 <a class="skip" href="#main">Skip to content</a>
 <header class="header">
   <div class="container nav">
@@ -453,14 +527,40 @@
   </div>
 </dialog>
 
-<footer><div class="container"><div class="footer-grid">
+<footer id="cookie-settings"><div class="container"><div class="footer-grid">
   <div class="footer-brand"><h3>Nishan</h3><p data-i18n="footerIntro">SLTDA-licensed Tourist Driver providing private tours, airport transfers and flexible journeys across Sri Lanka.</p></div>
   <div><h3 data-i18n="footerExplore">Explore</h3><div class="footer-links"><a href="#about" data-i18n="navAbout">About</a><a href="#services" data-i18n="navServices">Services</a><a href="#journeys" data-i18n="navJourneys">Journey Ideas</a><a href="#reviews" data-i18n="navReviews">Reviews</a><a href="#contact" data-i18n="navContact">Contact</a></div></div>
-  <div><h3 data-i18n="footerBusinesses">Businesses</h3><div class="footer-links"><a href="https://share.google/zqTTuRoGaV2QshfQv" target="_blank" rel="noopener">Google Business Profile</a><a href="https://sunspireholidays.com/" target="_blank" rel="noopener">SunSpire Holidays</a><a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a></div></div>
+  <div><h3 data-i18n="footerBusinesses">Businesses</h3><div class="footer-links"><a href="https://share.google/zqTTuRoGaV2QshfQv" target="_blank" rel="noopener">Google Business Profile</a><a href="https://sunspireholidays.com/" target="_blank" rel="noopener">SunSpire Holidays</a><a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a><a href="#cookie-settings" id="cookieSettingsFooter">Cookie Settings</a></div></div>
 </div><div class="footer-bottom"><span>© <span id="year"></span> Nishan. All rights reserved.</span><span data-i18n="footerLocation">Meegoda, Sri Lanka · Private Tourist Driver</span></div></div></footer>
 <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">↑</button>
 <a class="float-wa" href="https://wa.me/94702289167" target="_blank" rel="noopener" aria-label="WhatsApp Nishan">◉</a>
 <dialog class="v53-lightbox" id="v53Lightbox" aria-label="Photo viewer"><button class="v53-lightbox-close" id="v53LightboxClose" type="button" aria-label="Close image">×</button><img id="v53LightboxImage" src="" alt=""></dialog>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nishanCookieConsent", VERSION=1;
+  var banner=document.getElementById("cookieBanner"), modal=document.getElementById("cookiePreferences");
+  if(!banner||!modal) return;
+  var accept=document.getElementById("cookieAccept"), reject=document.getElementById("cookieReject"), settings=document.getElementById("cookieSettings"), close=document.getElementById("cookieClose"), save=document.getElementById("cookieSave"), analytics=document.getElementById("cookieAnalytics"), advertising=document.getElementById("cookieAdvertising"), footerSettings=document.getElementById("cookieSettingsFooter");
+  var copy={
+    en:{footerSettings:"Cookie Settings",title:"We use cookies and similar technologies",text:"We use analytics to understand how visitors use this website and advertising tools to measure campaigns. You can accept or reject optional technologies.",privacy:"Privacy Policy",reject:"Reject non-essential",settings:"Manage preferences",accept:"Accept all",prefTitle:"Cookie preferences",prefIntro:"Choose which optional technologies you allow us to use. Necessary technologies remain active because they are required for the website and your consent choices to function.",necessary:"Necessary",necessaryText:"Required for the website to function and to remember your consent choice.",always:"Always active",analytics:"Analytics",analyticsText:"Allows Google Analytics to measure website usage and improve the site.",advertising:"Advertising",advertisingText:"Allows Google advertising measurement and related advertising features.",save:"Save preferences",read:"Read our Privacy Policy",close:"Close"},
+    de:{footerSettings:"Cookie-Einstellungen",title:"Wir verwenden Cookies und ähnliche Technologien",text:"Wir verwenden Analysen, um die Nutzung dieser Website zu verstehen, und Werbetechnologien zur Messung von Kampagnen. Sie können optionale Technologien akzeptieren oder ablehnen.",privacy:"Datenschutzerklärung",reject:"Nicht notwendige ablehnen",settings:"Einstellungen",accept:"Alle akzeptieren",prefTitle:"Cookie-Einstellungen",prefIntro:"Wählen Sie, welche optionalen Technologien Sie zulassen. Notwendige Technologien bleiben aktiv, damit die Website und Ihre Einwilligungswahl funktionieren.",necessary:"Notwendig",necessaryText:"Erforderlich für die Website und zum Speichern Ihrer Einwilligungswahl.",always:"Immer aktiv",analytics:"Analyse",analyticsText:"Ermöglicht Google Analytics, die Nutzung der Website zu messen und die Website zu verbessern.",advertising:"Werbung",advertisingText:"Ermöglicht die Messung von Google-Werbung und damit verbundene Werbefunktionen.",save:"Einstellungen speichern",read:"Datenschutzerklärung lesen",close:"Schließen"},
+    fr:{footerSettings:"Paramètres des cookies",title:"Nous utilisons des cookies et technologies similaires",text:"Nous utilisons des outils d’analyse pour comprendre l’utilisation du site et des technologies publicitaires pour mesurer les campagnes. Vous pouvez accepter ou refuser les technologies facultatives.",privacy:"Politique de confidentialité",reject:"Refuser les cookies non essentiels",settings:"Gérer les préférences",accept:"Tout accepter",prefTitle:"Préférences de cookies",prefIntro:"Choisissez les technologies facultatives que vous autorisez. Les technologies nécessaires restent actives pour le fonctionnement du site et la mémorisation de votre choix.",necessary:"Nécessaires",necessaryText:"Nécessaires au fonctionnement du site et à la mémorisation de votre choix.",always:"Toujours actives",analytics:"Analyse",analyticsText:"Permet à Google Analytics de mesurer l’utilisation du site et de l’améliorer.",advertising:"Publicité",advertisingText:"Permet la mesure publicitaire de Google et les fonctions publicitaires associées.",save:"Enregistrer les préférences",read:"Lire la politique de confidentialité",close:"Fermer"},
+    es:{footerSettings:"Configuración de cookies",title:"Usamos cookies y tecnologías similares",text:"Utilizamos análisis para comprender cómo se usa este sitio y tecnologías publicitarias para medir campañas. Puede aceptar o rechazar las tecnologías opcionales.",privacy:"Política de privacidad",reject:"Rechazar las no esenciales",settings:"Gestionar preferencias",accept:"Aceptar todas",prefTitle:"Preferencias de cookies",prefIntro:"Elija qué tecnologías opcionales permite. Las tecnologías necesarias permanecen activas para que el sitio y sus preferencias funcionen.",necessary:"Necesarias",necessaryText:"Necesarias para el funcionamiento del sitio y para recordar su elección.",always:"Siempre activas",analytics:"Analítica",analyticsText:"Permite a Google Analytics medir el uso del sitio y ayudar a mejorarlo.",advertising:"Publicidad",advertisingText:"Permite medir la publicidad de Google y funciones publicitarias relacionadas.",save:"Guardar preferencias",read:"Leer la política de privacidad",close:"Cerrar"},
+    it:{footerSettings:"Impostazioni cookie",title:"Utilizziamo cookie e tecnologie simili",text:"Utilizziamo strumenti di analisi per capire come viene usato il sito e tecnologie pubblicitarie per misurare le campagne. Puoi accettare o rifiutare le tecnologie facoltative.",privacy:"Privacy Policy",reject:"Rifiuta non essenziali",settings:"Gestisci preferenze",accept:"Accetta tutto",prefTitle:"Preferenze cookie",prefIntro:"Scegli quali tecnologie facoltative autorizzare. Le tecnologie necessarie restano attive per il funzionamento del sito e per ricordare la tua scelta.",necessary:"Necessari",necessaryText:"Necessari per il funzionamento del sito e per ricordare la tua scelta.",always:"Sempre attivi",analytics:"Analisi",analyticsText:"Permette a Google Analytics di misurare l’utilizzo del sito e di migliorarlo.",advertising:"Pubblicità",advertisingText:"Permette la misurazione della pubblicità Google e le relative funzioni pubblicitarie.",save:"Salva preferenze",read:"Leggi la Privacy Policy",close:"Chiudi"},
+    ms:{footerSettings:"Tetapan Kuki",title:"Kami menggunakan kuki dan teknologi yang serupa",text:"Kami menggunakan analitik untuk memahami penggunaan laman ini dan teknologi pengiklanan untuk mengukur kempen. Anda boleh menerima atau menolak teknologi pilihan.",privacy:"Dasar Privasi",reject:"Tolak yang tidak perlu",settings:"Urus pilihan",accept:"Terima semua",prefTitle:"Pilihan kuki",prefIntro:"Pilih teknologi pilihan yang anda benarkan. Teknologi yang diperlukan kekal aktif untuk fungsi laman dan mengingati pilihan anda.",necessary:"Diperlukan",necessaryText:"Diperlukan untuk fungsi laman dan menyimpan pilihan persetujuan anda.",always:"Sentiasa aktif",analytics:"Analitik",analyticsText:"Membolehkan Google Analytics mengukur penggunaan laman dan membantu menambah baiknya.",advertising:"Pengiklanan",advertisingText:"Membolehkan pengukuran pengiklanan Google dan ciri pengiklanan berkaitan.",save:"Simpan pilihan",read:"Baca Dasar Privasi",close:"Tutup"},
+    ja:{footerSettings:"Cookie 設定",title:"Cookie と類似の技術を使用しています",text:"サイトの利用状況を把握するための分析と、広告キャンペーンの測定に広告技術を使用しています。任意の技術は許可または拒否できます。",privacy:"プライバシーポリシー",reject:"必須以外を拒否",settings:"設定を管理",accept:"すべて許可",prefTitle:"Cookie 設定",prefIntro:"許可する任意の技術を選択してください。サイトの機能と同意設定の保存に必要な技術は常に有効です。",necessary:"必須",necessaryText:"サイトの機能と同意設定の保存に必要です。",always:"常に有効",analytics:"分析",analyticsText:"Google Analytics によるサイト利用状況の測定と改善を可能にします。",advertising:"広告",advertisingText:"Google 広告の測定と関連する広告機能を可能にします。",save:"設定を保存",read:"プライバシーポリシーを読む",close:"閉じる"}
+  };
+  function lang(){var l=(document.documentElement.lang||"en").toLowerCase();return copy[l]?l:"en";}
+  function translate(){var x=copy[lang()];document.getElementById("cookieSettingsFooter").textContent=x.footerSettings;document.getElementById("cookieTitle").textContent=x.title;document.getElementById("cookieText").textContent=x.text;document.getElementById("cookiePrivacy").textContent=x.privacy;reject.textContent=x.reject;settings.textContent=x.settings;accept.textContent=x.accept;document.getElementById("cookiePreferencesTitle").textContent=x.prefTitle;document.getElementById("cookiePreferencesIntro").textContent=x.prefIntro;document.getElementById("cookieNecessaryTitle").textContent=x.necessary;document.getElementById("cookieNecessaryText").textContent=x.necessaryText;document.getElementById("cookieAlwaysActive").textContent=x.always;document.getElementById("cookieAnalyticsTitle").textContent=x.analytics;document.getElementById("cookieAnalyticsText").textContent=x.analyticsText;document.getElementById("cookieAdvertisingTitle").textContent=x.advertising;document.getElementById("cookieAdvertisingText").textContent=x.advertisingText;save.textContent=x.save;document.getElementById("cookieReadPrivacy").textContent=x.read;close.setAttribute("aria-label",x.close);}
+  function read(){try{var x=JSON.parse(localStorage.getItem(KEY)||"null");return x&&x.version===VERSION?x:null;}catch(e){return null;}}
+  function updateGoogle(a,b){window.gtag("consent","update",{"analytics_storage":a?"granted":"denied","ad_storage":b?"granted":"denied","ad_user_data":b?"granted":"denied","ad_personalization":b?"granted":"denied"});}
+  function saveConsent(a,b){var x={version:VERSION,analytics:!!a,advertising:!!b,timestamp:new Date().toISOString()};localStorage.setItem(KEY,JSON.stringify(x));updateGoogle(x.analytics,x.advertising);banner.hidden=true;modal.hidden=true;document.body.style.overflow="";}
+  function open(){var x=read();analytics.checked=!!(x&&x.analytics);advertising.checked=!!(x&&x.advertising);modal.hidden=false;document.body.style.overflow="hidden";}
+  function closeModal(){modal.hidden=true;document.body.style.overflow="";}
+  accept.addEventListener("click",function(){saveConsent(true,true);});reject.addEventListener("click",function(){saveConsent(false,false);});settings.addEventListener("click",open);close.addEventListener("click",closeModal);save.addEventListener("click",function(){saveConsent(analytics.checked,advertising.checked);});modal.addEventListener("click",function(e){if(e.target===modal)closeModal();});if(footerSettings)footerSettings.addEventListener("click",function(e){e.preventDefault();open();});window.addEventListener("nishan:languageChanged",translate);translate();var existing=read();if(existing){banner.hidden=true;updateGoogle(existing.analytics,existing.advertising);}else{banner.hidden=false;}})();
+</script>
 <script src="script.js"></script><script src="v5.3.js"></script>
 </body>
 </html>
