@@ -5,18 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thank You | Nishan Sri Lanka</title>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVCEM5Q7VG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+ <script>
+(function () {
 
-    gtag('config', 'G-MVCEM5Q7VG');
+  const CONSENT_KEY = "nishanCookieConsent";
+
+  let consent = null;
+
+  try {
+    consent = JSON.parse(
+      localStorage.getItem(CONSENT_KEY)
+    );
+  } catch (error) {
+    consent = null;
+  }
+
+  if (!consent) return;
+
+  if (!consent.analytics && !consent.advertising) {
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+
+  window.gtag("consent", "default", {
+
+    analytics_storage:
+      consent.analytics ? "granted" : "denied",
+
+    ad_storage:
+      consent.advertising ? "granted" : "denied",
+
+    ad_user_data:
+      consent.advertising ? "granted" : "denied",
+
+    ad_personalization:
+      consent.advertising ? "granted" : "denied"
+
+  });
+
+  const script = document.createElement("script");
+
+  script.async = true;
+
+  script.src =
+    "https://www.googletagmanager.com/gtag/js?id=G-MVCEM5Q7VG";
+
+  script.onload = function () {
+
+    window.gtag("js", new Date());
+
+    window.gtag(
+      "config",
+      "G-MVCEM5Q7VG"
+    );
 
     /* Successful enquiry = lead */
-    gtag('event', 'generate_lead');
-  </script>
+    window.gtag(
+      "event",
+      "generate_lead"
+    );
+
+  };
+
+  document.head.appendChild(script);
+
+})();
+</script>
 
   <style>
     body{
