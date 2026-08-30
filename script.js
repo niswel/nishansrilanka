@@ -335,3 +335,240 @@ document.querySelectorAll('a[href="#contact"]').forEach(link => {
     }
   });
 });
+
+/* =========================================================
+   COOKIE CONSENT + GOOGLE CONSENT MODE
+   ========================================================= */
+
+(function () {
+
+  const CONSENT_KEY = "nishanCookieConsent";
+
+  const banner = document.getElementById("cookieBanner");
+  const preferences = document.getElementById("cookiePreferences");
+
+  if (!banner || !preferences) return;
+
+  const acceptBtn = document.getElementById("cookieAccept");
+  const rejectBtn = document.getElementById("cookieReject");
+  const settingsBtn = document.getElementById("cookieSettings");
+
+  const closeBtn = document.getElementById("cookieClose");
+  const saveBtn = document.getElementById("cookieSave");
+
+  const analyticsToggle = document.getElementById("cookieAnalytics");
+  const advertisingToggle = document.getElementById("cookieAdvertising");
+
+
+  /* ---------------------------------------------------------
+     Google Consent Mode defaults
+     --------------------------------------------------------- */
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+
+
+  function setGoogleConsent(analytics, advertising) {
+
+    window.gtag("consent", "update", {
+
+      analytics_storage:
+        analytics ? "granted" : "denied",
+
+      ad_storage:
+        advertising ? "granted" : "denied",
+
+      ad_user_data:
+        advertising ? "granted" : "denied",
+
+      ad_personalization:
+        advertising ? "granted" : "denied"
+
+    });
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Load Google Analytics only after consent
+     --------------------------------------------------------- */
+
+  function loadGoogleAnalytics() {
+
+    if (window.__nishanGAloaded) return;
+
+    window.__nishanGAloaded = true;
+
+    const script = document.createElement("script");
+
+    script.async = true;
+    script.src =
+      "https://www.googletagmanager.com/gtag/js?id=G-MVCEM5Q7VG";
+
+    document.head.appendChild(script);
+
+    window.gtag("js", new Date());
+
+    window.gtag("config", "G-MVCEM5Q7VG");
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Save visitor choice
+     --------------------------------------------------------- */
+
+  function saveConsent(analytics, advertising) {
+
+    const consent = {
+      analytics: !!analytics,
+      advertising: !!advertising,
+      timestamp: new Date().toISOString()
+    };
+
+    localStorage.setItem(
+      CONSENT_KEY,
+      JSON.stringify(consent)
+    );
+
+    setGoogleConsent(
+      consent.analytics,
+      consent.advertising
+    );
+
+    if (consent.analytics || consent.advertising) {
+      loadGoogleAnalytics();
+    }
+
+    banner.hidden = true;
+    preferences.hidden = true;
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Open preferences
+     --------------------------------------------------------- */
+
+  function openPreferences() {
+
+    const stored =
+      localStorage.getItem(CONSENT_KEY);
+
+    if (stored) {
+
+      try {
+
+        const consent = JSON.parse(stored);
+
+        analyticsToggle.checked =
+          !!consent.analytics;
+
+        advertisingToggle.checked =
+          !!consent.advertising;
+
+      } catch (error) {
+
+        analyticsToggle.checked = false;
+        advertisingToggle.checked = false;
+
+      }
+
+    } else {
+
+      analyticsToggle.checked = false;
+      advertisingToggle.checked = false;
+
+    }
+
+    preferences.hidden = false;
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Existing consent
+     --------------------------------------------------------- */
+
+  const stored =
+    localStorage.getItem(CONSENT_KEY);
+
+  if (stored) {
+
+    try {
+
+      const consent = JSON.parse(stored);
+
+      setGoogleConsent(
+        !!consent.analytics,
+        !!consent.advertising
+      );
+
+      if (consent.analytics || consent.advertising) {
+        loadGoogleAnalytics();
+      }
+
+      banner.hidden = true;
+
+    } catch (error) {
+
+      localStorage.removeItem(CONSENT_KEY);
+      banner.hidden = false;
+
+    }
+
+  } else {
+
+    /* No decision yet */
+    setGoogleConsent(false, false);
+    banner.hidden = false;
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Button actions
+     --------------------------------------------------------- */
+
+  acceptBtn.addEventListener("click", function () {
+
+    saveConsent(true, true);
+
+  });
+
+
+  rejectBtn.addEventListener("click", function () {
+
+    saveConsent(false, false);
+
+  });
+
+
+  settingsBtn.addEventListener("click", function () {
+
+    openPreferences();
+
+  });
+
+
+  closeBtn.addEventListener("click", function () {
+
+    preferences.hidden = true;
+
+  });
+
+
+  saveBtn.addEventListener("click", function () {
+
+    saveConsent(
+      analyticsToggle.checked,
+      advertisingToggle.checked
+    );
+
+  });
+
+
+})();
